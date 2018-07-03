@@ -1,3 +1,4 @@
+# coding:utf-8
 '''
 Created on Oct 12, 2010
 Decision Tree Source Code for Machine Learning in Action Ch. 3
@@ -5,6 +6,7 @@ Decision Tree Source Code for Machine Learning in Action Ch. 3
 '''
 from math import log
 import operator
+import treePlotter as dtPlot
 
 def createDataSet():
     dataSet = [[1, 1, 'yes'],
@@ -102,4 +104,25 @@ def grabTree(filename):
     import pickle
     fr = open(filename)
     return pickle.load(fr)
-    
+
+def ContactLensesTest():
+    """
+    Desc:
+        预测隐形眼镜的测试代码
+    Args:
+        none
+    Returns:
+        none
+    """
+
+    # 加载隐形眼镜相关的 文本文件 数据
+    fr = open('lenses.txt')
+    # 解析数据，获得 features 数据
+    lenses = [inst.strip().split('\t') for inst in fr.readlines()]
+    # 得到数据的对应的 Labels
+    lensesLabels = ['age', 'prescript', 'astigmatic', 'tearRate']
+    # 使用上面的创建决策树的代码，构造预测隐形眼镜的决策树
+    lensesTree = createTree(lenses, lensesLabels)
+    print lensesTree
+    # 画图可视化展现
+    dtPlot.createPlot(lensesTree)
