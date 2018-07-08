@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 '''
 Created on Oct 27, 2010
 Logistic Regression Working Module
@@ -110,4 +111,21 @@ def multiTest():
     for k in range(numTests):
         errorSum += colicTest()
     print "after %d iterations the average error rate is: %f" % (numTests, errorSum/float(numTests))
+
+def testLR():
+    # 1.收集并准备数据
+    dataMat, labelMat = loadDataSet()
+
+    # print dataMat, '---\n', labelMat
+    # 2.训练模型，  f(x)=a1*x1+b2*x2+..+nn*xn中 (a1,b2, .., nn).T的矩阵值
+    # 因为数组没有是复制n份， array的乘法就是乘法
+    dataArr = array(dataMat)
+    # print dataArr
+    weights = gradAscent(dataArr, labelMat)
+    # weights = stocGradAscent0(dataArr, labelMat)
+    # weights = stocGradAscent1(dataArr, labelMat)
+    # print '*'*30, weights
+
+    # 数据可视化
+    plotBestFit(weights)
         
