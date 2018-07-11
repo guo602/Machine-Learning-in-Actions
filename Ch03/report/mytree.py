@@ -143,10 +143,6 @@ def createTree(data,label):
 
 def test():
     data,label=loadData()
-   
-
-   
-
     tree=createTree(data,label)
     print tree
 
